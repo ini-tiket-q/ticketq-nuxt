@@ -1,0 +1,49 @@
+@import 'component/_compScrollbar';
+
+* { scroll-behavior: smooth; }
+
+html, body {
+  @apply w-screen overflow-x-hidden font-normal bg-white text-gray-800;
+  overflow-y: overlay;
+  overflow-wrap: anywhere;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.bg-body { @apply bg-white; }
+
+.section {
+  .container { max-width: 1280px; }
+}
+
+.normal-text {
+  ul { @apply space-y-2; }
+  li {
+    @apply flex;
+    &:before {
+      content: '';
+      @apply block flex-shrink-0 w-2 h-2 rounded-full mt-2 mr-2 bg-gray-800;
+    }
+  }
+}
+
+.layout-enter-active,
+.layout-leave-active {
+  transition: .3s;
+}
+.layout-enter,
+.layout-leave-active {
+  transform: translateY(15px);
+  opacity: 0;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: .3s;
+}
+.page-enter,
+.page-leave-active {
+  transform: translateY(15px);
+  opacity: 0;
+}

@@ -1,7 +1,14 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  ssr: false,
+  target: 'server',
+
+  server: {
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || 3000
+  },
+
   head: {
-    title: 'tiketq',
+    titleTemplate: '%s ' + process.env.TITLE,
     htmlAttrs: {
       lang: 'en'
     },
@@ -12,42 +19,58 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700&display=swap' }
     ]
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: ['~/assets/style/_allBundle.less'],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/local.js', mode: 'client' },
+    { src: '~/plugins/vue-moment.js', mode: 'client' },
+    { src: '~/plugins/aos.js', mode: 'client' }
   ],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt-hero-icons/solid/nuxt'
   ],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'v-wave/nuxt',
+    'vue-currency-filter/nuxt'
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
-  },
+  axios: { baseURL: process.env.API_BASE_URL },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
+
+  currencyFilter: [
+    {
+      name: 'numberIND',
+      symbol: '',
+      thousandsSeparator: '.',
+      fractionCount: 0,
+      fractionSeparator: ',',
+      symbolPosition: 'front',
+      symbolSpacing: true,
+      avoidEmptyDecimals: undefined
+    },
+    {
+      name: 'currencyIDR',
+      symbol: 'Rp',
+      thousandsSeparator: '.',
+      fractionCount: 0,
+      fractionSeparator: ',',
+      symbolPosition: 'front',
+      symbolSpacing: true,
+      avoidEmptyDecimals: undefined
+    }
+  ]
 }
