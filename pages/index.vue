@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="section search bg-cover bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/hero.jpeg')})`}">
-      <div class="flex justify-center items-center min-h-screen w-full pt-16 pb-20 bg-black bg-opacity-30 text-white lg:pt-28">
+    <div class="section search bg-cover bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/hero.png')})`}">
+      <div class="flex justify-center items-center min-h-screen w-full pt-16 pb-20 lg:pt-28">
         <div class="container" style="max-width: 1024px;">
           <div class="text-center">
             <div class="first-text font-medium">
