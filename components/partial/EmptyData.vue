@@ -13,7 +13,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: 'Ups, tidak ada data yang ditemukan'
+      default: 'Oops, nothing found'
     }
   }
 }
