@@ -36,6 +36,26 @@
         </div>
       </div>
     </div>
+    <div class="section service bg-primeblue text-white">
+      <div class="container py-12 text-center">
+        <div class="section-title">
+          Why Book with TiketQ
+        </div>
+        <div class="grid grid-cols-12 gap-y-12 mt-8 sm:gap-8">
+          <div v-for="(svc, index) in allService" :key="index" class="col-span-12 sm:col-span-4">
+            <div class="mx-auto" style="max-width: 10rem;">
+              <div class="aspect-h-1 aspect-w-1 bg-contain bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/' + svc.img)})`}" />
+            </div>
+            <div class="mt-4" style="font-size: 1.5rem;">
+              {{ svc.name }}
+            </div>
+            <div class="mt-4">
+              {{ svc.desc }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -55,7 +75,24 @@ export default {
         infant: null,
         date: null,
         class: null
-      }
+      },
+      allService: [
+        {
+          name: 'Secure Transaction Guaranted',
+          desc: 'Security and privacy of your online transaction are protected by RapidSSL authorized technology. Receive instant confirmation and e-ticket directly in your email.',
+          img: 'svcSecurity.png'
+        },
+        {
+          name: 'Assistance and Support',
+          desc: 'We can help you navigate changes in travel plans, flight delays, cancellations, or unforeseen circumstances.',
+          img: 'svcAssistant.png'
+        },
+        {
+          name: 'Various Payment Options',
+          desc: 'Easy transaction with various payment options from ATM Transfer, Credit Card to Internet Banking.',
+          img: 'svcPayment.png'
+        }
+      ]
     }
   }
 }
