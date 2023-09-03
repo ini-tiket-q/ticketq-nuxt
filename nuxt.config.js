@@ -30,7 +30,8 @@ export default {
   plugins: [
     { src: '~/plugins/local.js', mode: 'client' },
     { src: '~/plugins/vue-moment.js', mode: 'client' },
-    { src: '~/plugins/aos.js', mode: 'client' }
+    { src: '~/plugins/aos.js', mode: 'client' },
+    { src: '~/plugins/vue-datepicker.js', mode: 'client' }
   ],
 
   components: true,

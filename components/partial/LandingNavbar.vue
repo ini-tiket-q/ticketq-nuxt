@@ -1,6 +1,6 @@
 <template>
   <nav class="fixed top-0 w-screen" style="z-index: 5;">
-    <div class="container max-w-screen-lg pt-2 pb-3 bg-primeblue text-white sm:rounded-b-xl">
+    <div class="container max-w-screen-lg pt-2 pb-3 bg-primeblue text-white sm:rounded-b-xl" style="max-width: 1024px;">
       <div class="flex items-center justify-between">
         <div class="bg-cover bg-center bg-no-repeat" style="margin-bottom: 0;" :style="{ backgroundImage: `url(${require('~/assets/img/logo.png')})` }" @click="$router.push('/')">
           <img :src="require('~/assets/img/logo.png')" class="h-8 invisible">
