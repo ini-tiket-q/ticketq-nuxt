@@ -35,7 +35,7 @@ export default $axios => ({
           ]
         },
         {
-          airline: { code: 'SUPERAIRJET', name: 'Super Air Jet' },
+          airline: { code: 'LIONAIR', name: 'Lion Air' },
           origin: { name: 'BTH', at: '2023-09-03T08:25:00+00:00' },
           destination: { name: 'DPS', at: '2023-09-03T10:00:00+00:00' },
           transit: [],

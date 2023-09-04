@@ -18,7 +18,10 @@
         </div>
       </div>
     </nav>
-    <div class="pt-32 pb-12">
+    <div class="pt-28 pb-12">
+      <div class="container pb-8">
+        <ScheduleCard :schedule="schedule" :has-choose-btn="false" />
+      </div>
       <Nuxt />
     </div>
     <LandingFooter class="mt-auto" />
@@ -27,6 +30,7 @@
 
 <script>
 import SplashScreen from '~/components/partial/SplashScreen'
+import ScheduleCard from '~/components/functional/ScheduleCard'
 import LandingFooter from '~/components/partial/LandingFooter'
 
 export default {
@@ -34,6 +38,7 @@ export default {
 
   components: {
     SplashScreen,
+    ScheduleCard,
     LandingFooter
   },
 
@@ -41,9 +46,12 @@ export default {
     return {
       showSplashScreen: true,
       orderStep: ['Data', 'Review', 'Payment', 'eTicket'],
-      currentStep: 0
+      currentStep: 0,
+      schedule: null
     }
   },
+
+  fetch () { this.schedule = JSON.parse(window.localStorage.getItem('schedule')) },
 
   watch: {
     $route (to) {
