@@ -1,5 +1,6 @@
 <template>
   <div class="section footer bg-white">
+    <SeparatorLine />
     <div class="container pt-12 pb-8 lg:pt-24 xl:px-24">
       <div class="grid grid-cols-12 gap-8">
         <div v-for="(set, index) in linkSet" :key="index" class="col-span-6 space-y-4 sm:col-span-4">
@@ -31,8 +32,12 @@
 </template>
 
 <script>
+import SeparatorLine from '~/components/partial/SeparatorLine'
+
 export default {
   name: 'LandingFooter',
+
+  components: { SeparatorLine },
 
   data () {
     return {

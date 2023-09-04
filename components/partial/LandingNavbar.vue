@@ -43,15 +43,7 @@ export default {
 
   data () {
     return {
-      openMenu: false,
-      showTranslatingLayer: false,
-      pages: [
-        {
-          text: 'Home',
-          to: '/',
-          child: []
-        }
-      ]
+      openMenu: false
     }
   },
 

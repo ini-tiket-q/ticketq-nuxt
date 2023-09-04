@@ -13,11 +13,11 @@
           Looks like you are enjoying it so much that you finally get lost.<br>Don`t worry, you can
         </p>
         <div class="flex items-center justify-center space-x-4">
-          <SpButton color="green" @click.native="$router.go(-1)">
+          <SpButton color="primeblue" border @click.native="$router.go(-1)">
             Back
           </SpButton>
           <span>or</span>
-          <SpButton @click.native="$router.replace('/')">
+          <SpButton color="primeblue" @click.native="$router.replace('/')">
             Towards to home
           </SpButton>
         </div>

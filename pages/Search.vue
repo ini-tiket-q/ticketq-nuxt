@@ -174,7 +174,7 @@
               </div>
             </div>
             <div class="flex justify-end w-full pt-4">
-              <SpButton color="primeorange">
+              <SpButton color="primeorange" @click.native.stop="$router.push('/order/data')">
                 Choose
               </SpButton>
             </div>
