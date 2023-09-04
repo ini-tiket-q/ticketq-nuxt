@@ -26,6 +26,28 @@
     </div>
     <div class="section partner bg-white">
       <div class="container pt-4 pb-12">
+        <div class="grid grid-cols-12 gap-4 mb-8">
+          <div class="col-span-12 sm:col-span-6 lg:col-span-2">
+            <SpSelect placeholder="Sort by price" :list="filter.sort" @change="selectPriceSort" />
+          </div>
+          <div class="col-span-12 sm:col-span-6 lg:col-span-2">
+            <SpSelect placeholder="Airline" :list="filter.airline" @change="selectAirline" />
+          </div>
+          <div class="col-span-12 sm:col-span-4 lg:col-span-2">
+            <SpSelect placeholder="Transit" :list="filter.transit" @change="selectTransit" />
+          </div>
+          <div class="col-span-12 sm:col-span-4 lg:col-span-2">
+            <SpSelect placeholder="Baggage" :list="filter.baggage" @change="selectBaggage" />
+          </div>
+          <div class="col-span-12 sm:col-span-4 lg:col-span-2">
+            <SpSelect placeholder="Class" :list="filter.class" @change="selectClass" />
+          </div>
+          <div class="col-span-12 lg:col-span-2">
+            <SpButton color="primeblue" block>
+              Search
+            </SpButton>
+          </div>
+        </div>
         <div v-if="showSkeleton" class="space-y-4">
           <div class="p-2 rounded-xl border border-gray-400 bg-white">
             <div class="grid grid-cols-12 gap-8 sm:gap-y-1">
@@ -167,6 +189,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import SkeletonBlock from '~/components/partial/SkeletonBlock'
 import EmptyData from '~/components/partial/EmptyData'
+import SpSelect from '~/components/partial/SpSelect'
 import SpButton from '~/components/partial/SpButton'
 
 export default {
@@ -175,6 +198,7 @@ export default {
   components: {
     SkeletonBlock,
     EmptyData,
+    SpSelect,
     SpButton
   },
 
@@ -183,6 +207,36 @@ export default {
   data () {
     return {
       showSkeleton: true,
+      filter: {
+        sort: [
+          { value: 'priceAsc', text: 'Lowest to highest' },
+          { value: 'priceDesc', text: 'Highest to lowest' }
+        ],
+        airline: [
+          { value: 'airasia', text: 'Air Asia' },
+          { value: 'garuda', text: 'Garuda Indonesia' }
+        ],
+        transit: [
+          { value: 'direct', text: 'Direct' },
+          { value: 'transit', text: 'Transit' }
+        ],
+        baggage: [
+          { value: 'baggage', text: 'Baggage' },
+          { value: 'nonBaggage', text: 'Non-Baggage' }
+        ],
+        class: [
+          { value: 'economy', text: 'Economy' },
+          { value: 'business', text: 'Business' },
+          { value: 'first', text: 'First class' }
+        ]
+      },
+      inputFilter: {
+        sort: null,
+        airline: null,
+        transit: null,
+        baggage: null,
+        class: null
+      },
       allRoute: [],
       allScheduleData: []
     }
@@ -215,7 +269,17 @@ export default {
           class: 'Economy'
         }
       ]
-    }
+    },
+
+    selectPriceSort (selection) { this.inputFilter.sort = selection },
+
+    selectAirline (selection) { this.inputFilter.airline = selection },
+
+    selectTransit (selection) { this.inputFilter.transit = selection },
+
+    selectBaggage (selection) { this.inputFilter.baggage = selection },
+
+    selectClass (selection) { this.inputFilter.class = selection }
   }
 }
 </script>
