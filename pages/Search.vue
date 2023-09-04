@@ -26,6 +26,36 @@
     </div>
     <div class="section partner bg-white">
       <div class="container pt-4 pb-12">
+        <div v-if="showSkeleton" class="space-y-4">
+          <div class="p-2 rounded-xl border border-gray-400 bg-white">
+            <div class="grid grid-cols-12 gap-8 sm:gap-y-1">
+              <div class="col-span-3 sm:col-span-2">
+                <SkeletonBlock class="h-24 w-24 rounded-xl" />
+              </div>
+              <div class="col-span-9 sm:col-span-5 lg:col-span-4">
+                <div class="space-y-2">
+                  <SkeletonBlock class="h-8 w-36 rounded-lg" />
+                  <div class="flex space-x-2">
+                    <SkeletonBlock class="h-4 w-12 rounded-lg" />
+                    <SkeletonBlock class="h-4 w-20 rounded-lg" />
+                  </div>
+                  <SkeletonBlock class="h-8 w-44 rounded-lg" />
+                </div>
+              </div>
+              <div class="col-span-12 sm:col-span-5 lg:col-span-4">
+                <div class="flex items-center w-full space-x-2 text-center">
+                  <SkeletonBlock class="flex-shrink-0 h-12 w-16 rounded-lg" />
+                  <SkeletonBlock class="w-full rounded-lg" style="height: 2px;" />
+                  <SkeletonBlock class="flex-shrink-0 h-12 w-16 rounded-lg" />
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-end w-full pt-4">
+              <SkeletonBlock class="h-9 w-24 rounded-lg" />
+            </div>
+          </div>
+        </div>
+        <EmptyData v-if="!showSkeleton && allScheduleData.length <= 0" text="Oops, no flight found<br>Try to search another schedule" />
         <div v-if="!showSkeleton && allScheduleData.length > 0" class="space-y-4">
           <div v-for="(schedule, index) in allScheduleData" :key="index" v-wave class="p-2 rounded-xl border border-gray-400 bg-white cursor-pointer click-effect" @click="allScheduleData[index].showDetail = !allScheduleData[index].showDetail">
             <div class="grid grid-cols-12 gap-8 sm:gap-y-1">
@@ -135,12 +165,16 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import SkeletonBlock from '~/components/partial/SkeletonBlock'
+import EmptyData from '~/components/partial/EmptyData'
 import SpButton from '~/components/partial/SpButton'
 
 export default {
   name: 'SearchPage',
 
   components: {
+    SkeletonBlock,
+    EmptyData,
     SpButton
   },
 
