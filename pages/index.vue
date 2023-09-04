@@ -46,7 +46,7 @@
             <div class="mx-auto" style="max-width: 10rem;">
               <div class="aspect-h-1 aspect-w-1 bg-contain bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/' + svc.img)})`}" />
             </div>
-            <div class="mt-4" style="font-size: 1.5rem;">
+            <div class="mt-4 section-subtitle">
               {{ svc.name }}
             </div>
             <div class="mt-4">
@@ -97,10 +97,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-  .section {
-    scrollbar-width: 0;
-    scrollbar-height: 0;
-  }
-</style>

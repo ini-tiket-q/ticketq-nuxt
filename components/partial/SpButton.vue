@@ -10,7 +10,9 @@
       'rounded-full': round,
       'w-full': block,
       'focus:ring-primeblue-600': color === 'primeblue',
+      'focus:ring-primeorange-500': color === 'primeorange',
       'text-white bg-primeblue hover:bg-primeblue-600': color === 'primeblue' && !border,
+      'text-white bg-primeorange hover:bg-primeorange-500': color === 'primeorange' && !border,
       'focus:ring-red-600': color === 'red',
       'text-white bg-red-500 hover:bg-red-600': color === 'red' && !border,
       'focus:ring-blue-500': color === 'blue',
@@ -51,7 +53,7 @@ export default {
     },
     color: {
       type: String,
-      default: null // primeblue, red, blue, white
+      default: null // primeblue, primeorange, red, blue, white
     },
     textPrimeblue: {
       type: Boolean,

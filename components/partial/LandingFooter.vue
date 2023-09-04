@@ -3,7 +3,7 @@
     <div class="container pt-12 pb-8 lg:pt-24 xl:px-24">
       <div class="grid grid-cols-12 gap-8">
         <div v-for="(set, index) in linkSet" :key="index" class="col-span-6 space-y-4 sm:col-span-4">
-          <div style="font-size: 1.3rem">
+          <div class="section-subtitle">
             {{ set.name }}
           </div>
           <div v-for="(child, indexChild) in set.children" :key="indexChild" v-wave class="text-gray-500 cursor-pointer click-effect">

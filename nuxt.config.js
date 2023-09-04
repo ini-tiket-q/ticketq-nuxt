@@ -28,6 +28,7 @@ export default {
   css: ['~/assets/style/_allBundle.less'],
 
   plugins: [
+    { src: '~/plugins/api.js' },
     { src: '~/plugins/local.js', mode: 'client' },
     { src: '~/plugins/vue-moment.js', mode: 'client' },
     { src: '~/plugins/aos.js', mode: 'client' },
@@ -54,11 +55,11 @@ export default {
 
   currencyFilter: [
     {
-      name: 'numberIND',
+      name: 'numberEN',
       symbol: '',
-      thousandsSeparator: '.',
+      thousandsSeparator: ',',
       fractionCount: 0,
-      fractionSeparator: ',',
+      fractionSeparator: '.',
       symbolPosition: 'front',
       symbolSpacing: true,
       avoidEmptyDecimals: undefined
