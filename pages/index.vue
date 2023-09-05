@@ -3,8 +3,8 @@
     <div class="section search bg-cover bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/hero.png')})`}">
       <div class="flex justify-center items-center w-full pt-32 pb-20 lg:pt-56 lg:pb-40">
         <div class="container" style="max-width: 1024px;">
-          <div class="p-2 border border-white rounded-lg bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm">
-            <div class="grid grid-cols-12 gap-4 md:hidden">
+          <div class="p-2 border border-white rounded-lg bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm md:hidden">
+            <div class="grid grid-cols-12 gap-4">
               <div class="col-span-12 sm:col-span-6">
                 <SpSelect label="From" placeholder="Choose region" :list="allCity" @change="selectOrigin" />
               </div>
