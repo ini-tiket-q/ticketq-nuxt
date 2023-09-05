@@ -1,9 +1,89 @@
 <template>
   <div>
     <div class="section search bg-cover bg-center bg-no-repeat" :style="{ backgroundImage: `url(${require('~/assets/img/illu/hero.png')})`}">
-      <div class="flex justify-center items-center min-h-screen w-full pt-16 pb-20 lg:pt-28">
+      <div class="flex justify-center items-center w-full pt-32 pb-20 lg:pt-56 lg:pb-40">
         <div class="container" style="max-width: 1024px;">
-          Input set of search goes here
+          <div class="p-2 border border-white rounded-lg bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm">
+            <div class="grid grid-cols-12 gap-4 md:hidden">
+              <div class="col-span-12 sm:col-span-6">
+                <SpSelect label="From" placeholder="Choose region" :list="allCity" @change="selectOrigin" />
+              </div>
+              <div class="col-span-12 sm:col-span-6">
+                <SpSelect label="To" placeholder="Choose destination" :list="allCity" @change="selectDestination" />
+              </div>
+              <div class="col-span-12 sm:col-span-6">
+                <SpSelect label="Class" placeholder="Choose class" :list="allClass" @change="selectClass" />
+              </div>
+              <div class="col-span-12 sm:col-span-6">
+                <SpInputText
+                  v-model="inputSearch.date"
+                  label="Departure date"
+                  type="date"
+                  format-date="MMMM DD, YYYY"
+                  clearable
+                  placeholder="Choose departure date"
+                />
+              </div>
+              <div class="col-span-12">
+                <SpButton color="primeorange" block @click.native="$router.push('/search')">
+                  Search
+                </SpButton>
+              </div>
+            </div>
+          </div>
+          <div class="hidden w-full p-2 rounded-full bg-white md:flex">
+            <div class="w-full px-2">
+              <label for="origin">From</label>
+              <select id="origin" v-model="inputSearch.origin" class="w-full" style="outline: none;">
+                <option :value="null">
+                  Choose origin
+                </option>
+                <option v-for="(city, index) in allCity" :key="index" :value="city.id">
+                  {{ city.text }}
+                </option>
+              </select>
+            </div>
+            <div class="w-full px-2 border-l border-gray-400 ml-2">
+              <label for="destination">To</label>
+              <select id="destination" v-model="inputSearch.destination" class="w-full" style="outline: none;">
+                <option :value="null">
+                  Choose destination
+                </option>
+                <option v-for="(city, index) in allCity" :key="index" :value="city.id">
+                  {{ city.text }}
+                </option>
+              </select>
+            </div>
+            <div class="w-full px-2 border-l border-gray-400 ml-2">
+              <label>Departure date</label>
+              <ClientOnly>
+                <DatePicker
+                  v-model="inputSearch.date"
+                  type="date"
+                  value-type="format"
+                  format="MMMM DD, YYYY"
+                  clearable
+                  class="p-0"
+                  :input-attr="{ style: `padding: 0; border: 0; outline: none` }"
+                  placeholder="Choose departure"
+                />
+              </ClientOnly>
+            </div>
+            <div class="w-full px-2 border-l border-gray-400 ml-2">
+              <label for="class">Class</label>
+              <select id="class" v-model="inputSearch.class" class="w-full" style="outline: none;">
+                <option :value="null">
+                  Choose class
+                </option>
+                <option v-for="(cl, index) in allClass" :key="index" :value="cl.value">
+                  {{ cl.text }}
+                </option>
+              </select>
+            </div>
+            <div v-wave class="flex flex-shrink-0 items-center justify-center h-16 w-16 rounded-full bg-primeorange text-white cursor-pointer click-effect" @click="$router.push('/search')">
+              <solid-search-icon class="h-8 w-8" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -60,19 +140,35 @@
 </template>
 
 <script>
+import SpSelect from '~/components/partial/SpSelect'
+import SpInputText from '~/components/partial/SpInputText'
+import SpButton from '~/components/partial/SpButton'
+
 export default {
   name: 'IndexPage',
+
+  components: {
+    SpSelect,
+    SpInputText,
+    SpButton
+  },
 
   layout: 'landing',
 
   data () {
     return {
+      allCity: [
+        { value: 'bth', text: 'Batam (BTH)' },
+        { value: 'dps', text: 'Bali (DPS)' }
+      ],
+      allClass: [
+        { value: 'economy', text: 'Economy' },
+        { value: 'business', text: 'Business' },
+        { value: 'first', text: 'First class' }
+      ],
       inputSearch: {
         origin: null,
         destination: null,
-        adult: null,
-        child: null,
-        infant: null,
         date: null,
         class: null
       },
@@ -98,6 +194,14 @@ export default {
         pw: { value: null, error: null }
       }
     }
+  },
+
+  methods: {
+    selectOrigin (selection) { this.inputSearch.origin = selection },
+
+    selectDestination (selection) { this.inputSearch.destination = selection },
+
+    selectClass (selection) { this.inputSearch.class = selection }
   }
 }
 </script>
