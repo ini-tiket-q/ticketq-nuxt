@@ -11,9 +11,23 @@
             <div class="transform duration-300" :class="{ 'w-6 border-b-2 border-white my-2': !openMenu }" />
             <div class="w-6 border-b-2 border-white transform duration-300" :class="{ '-rotate-45': openMenu }" />
           </div>
-          <div v-if="loggedIn" v-wave class="flex flex-shrink-0 items-center justify-center h-8 w-8 rounded-full overflow-hidden bg-white text-primeblue cursor-pointer click-effect" @click="$router.push('/profile')">
-            <solid-user-icon class="h-6 w-6" />
-          </div>
+          <SpDropdown v-if="loggedIn" placement="right">
+            <template #button>
+              <div class="menu-item">
+                <div v-wave class="flex flex-shrink-0 items-center justify-center h-8 w-8 rounded-full overflow-hidden bg-white text-primeblue cursor-pointer click-effect">
+                  <solid-user-icon class="h-6 w-6" />
+                </div>
+              </div>
+            </template>
+            <div slot="content">
+              <div v-for="(menu, index) in userMenu" :key="index" v-wave class="content-item text-gray-800" @click="$router.push(menu.to)">
+                {{ menu.text }}
+              </div>
+              <div v-wave class="content-item text-gray-800" @click="$nuxt.$emit('openModalLogout')">
+                Logout
+              </div>
+            </div>
+          </SpDropdown>
           <div v-if="!loggedIn" class="hidden sm:flex sm:items-center sm:space-x-4">
             <SpButton color="primeblue">
               Login
@@ -36,25 +50,34 @@
       </div>
     </nav>
     <ModalAuth />
+    <ModalLogout />
   </div>
 </template>
 
 <script>
+import SpDropdown from '~/components/partial/SpDropdown'
 import SpButton from '~/components/partial/SpButton'
 import ModalAuth from '~/components/functional/ModalAuth'
+import ModalLogout from '~/components/functional/ModalLogout'
 
 export default {
   name: 'LandingNavbar',
 
   components: {
+    SpDropdown,
     SpButton,
-    ModalAuth
+    ModalAuth,
+    ModalLogout
   },
 
   data () {
     return {
       loggedIn: true,
-      openMenu: false
+      openMenu: false,
+      userMenu: [
+        { text: 'My profile', to: '/profile' },
+        { text: 'My order', to: '/order' }
+      ]
     }
   },
 
