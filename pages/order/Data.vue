@@ -22,7 +22,14 @@
             </div>
           </div>
           <div class="col-span-12 sm:col-span-6">
-            <SpInputText v-model="input.order.email.value" label="email" placeholder="Example: johndoe@mail.com" :error="input.order.email.error" />
+            <SpInputText
+              v-model="input.order.email.value"
+              type="email"
+              inputmode="email"
+              label="email"
+              placeholder="Example: johndoe@mail.com"
+              :error="input.order.email.error"
+            />
           </div>
         </div>
       </div>

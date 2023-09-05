@@ -6,12 +6,15 @@
           <div class="bg-cover bg-center bg-no-repeat" style="margin-bottom: 0;" :style="{ backgroundImage: `url(${require('~/assets/img/logo.png')})` }" @click="$router.push('/')">
             <img :src="require('~/assets/img/logo.png')" class="h-8 invisible">
           </div>
-          <div class="cursor-pointer sm:hidden" @click="openMenu = !openMenu">
+          <div v-if="!loggedIn" class="cursor-pointer sm:hidden" @click="openMenu = !openMenu">
             <div class="w-6 border-b-2 border-white transform duration-300" :class="{ 'rotate-45': openMenu }" />
             <div class="transform duration-300" :class="{ 'w-6 border-b-2 border-white my-2': !openMenu }" />
             <div class="w-6 border-b-2 border-white transform duration-300" :class="{ '-rotate-45': openMenu }" />
           </div>
-          <div class="hidden sm:flex sm:items-center sm:space-x-4">
+          <div v-if="loggedIn" v-wave class="flex flex-shrink-0 items-center justify-center h-8 w-8 rounded-full overflow-hidden bg-white text-primeblue cursor-pointer click-effect" @click="$router.push('/profile')">
+            <solid-user-icon class="h-6 w-6" />
+          </div>
+          <div v-if="!loggedIn" class="hidden sm:flex sm:items-center sm:space-x-4">
             <SpButton color="primeblue">
               Login
             </SpButton>
@@ -21,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div v-if="openMenu" class="container py-4 bg-primeblue text-white overflow-auto sm:hidden" style="max-height: calc(100vh - ((.75rem * 2) + 2rem));">
+      <div v-if="openMenu && !loggedIn" class="container py-4 bg-primeblue text-white overflow-auto sm:hidden" style="max-height: calc(100vh - ((.75rem * 2) + 2rem));">
         <div class="flex items-center space-x-4 mt-4 sm:hidden">
           <SpButton color="primeblue" block @click.native="$nuxt.$emit('openModalAuth')">
             Login
@@ -50,6 +53,7 @@ export default {
 
   data () {
     return {
+      loggedIn: true,
       openMenu: false
     }
   },

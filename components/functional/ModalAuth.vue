@@ -4,8 +4,15 @@
       <span>Login / Register</span>
     </template>
     <div class="space-y-4">
-      <SpInputText v-model="input.phone.value" label="Email / phone number" placeholder="Enter your email / phone number" :error="input.phone.error" />
-      <SpInputText v-model="input.pw.value" label="Password" placeholder="Enter your password" :error="input.pw.error" />
+      <SpInputText
+        v-model="input.phone.value"
+        type="email"
+        inputmode="email"
+        label="Email / phone number"
+        placeholder="Enter your email / phone number"
+        :error="input.phone.error"
+      />
+      <SpInputText v-model="input.pw.value" type="password" label="Password" placeholder="Enter your password" :error="input.pw.error" />
     </div>
     <template #footer-content>
       <SpButton color="white" @click.native="showModalAuth = false">
