@@ -51,7 +51,10 @@ export default {
     }
   },
 
-  fetch () { this.schedule = JSON.parse(window.localStorage.getItem('schedule')) },
+  fetch () {
+    this.schedule = JSON.parse(window.localStorage.getItem('schedule'))
+    if (!this.schedule) { this.$router.go(-1) }
+  },
 
   watch: {
     $route (to) {

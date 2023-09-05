@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="section partner bg-white">
+    <div class="section bg-white">
       <div class="container">
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 section-subtitle">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <SeparatorLine class="max-w-screen-lg my-8 mx-auto" />
-    <div class="section partner bg-white">
+    <div class="section bg-white">
       <div class="container">
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 section-subtitle">
@@ -103,6 +103,17 @@ export default {
 
   fetch () {
     this.getAllPhoneCode()
+    if (JSON.parse(window.localStorage.getItem('orderData'))) {
+      const orderData = JSON.parse(window.localStorage.getItem('orderData'))
+      this.input.order.firstName.value = orderData.order.firstName.value
+      this.input.order.lastName.value = orderData.order.lastName.value
+      this.input.order.phoneCode.value = orderData.order.phoneCode.value
+      this.input.order.phone.value = orderData.order.phone.value
+      this.input.order.email.value = orderData.order.email.value
+      this.input.passanger.firstName.value = orderData.passanger.firstName.value
+      this.input.passanger.lastName.value = orderData.passanger.lastName.value
+      this.input.passanger.birthDate.value = orderData.passanger.birthDate.value
+    }
   },
 
   head: { title: 'Order - Data completion |' },
@@ -117,7 +128,10 @@ export default {
     selectPhoneCode (selection) { this.input.order.phoneCode.value = selection },
 
     validateForm () {
-      if (this.input.order.firstName.value && this.input.order.lastName.value && this.input.order.phoneCode.value && this.input.order.phone.value && this.input.order.email.value && this.input.passanger.firstName.value && this.input.passanger.lastName.value && this.input.passanger.birthDate.value) { this.$router.push('/order/review') }
+      if (this.input.order.firstName.value && this.input.order.lastName.value && this.input.order.phoneCode.value && this.input.order.phone.value && this.input.order.email.value && this.input.passanger.firstName.value && this.input.passanger.lastName.value && this.input.passanger.birthDate.value) {
+        window.localStorage.setItem('orderData', JSON.stringify(this.input))
+        this.$router.push('/order/review')
+      }
       if (this.input.order.firstName.value) { this.input.order.firstName.error = null }
       if (this.input.order.lastName.value) { this.input.order.lastName.error = null }
       if (this.input.order.phoneCode.value) { this.input.order.phoneCode.error = null }

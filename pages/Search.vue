@@ -146,6 +146,7 @@ export default {
 
   async fetch () {
     window.localStorage.removeItem('schedule')
+    window.localStorage.removeItem('orderData')
     this.getAllRoute()
     await this.getAllSchedule().then(() => { this.showSkeleton = false })
   },
