@@ -92,7 +92,11 @@ export default {
           desc: 'Easy transaction with various payment options from ATM Transfer, Credit Card to Internet Banking.',
           img: 'svcPayment.png'
         }
-      ]
+      ],
+      inputAuth: {
+        phone: { value: null, error: null },
+        pw: { value: null, error: null }
+      }
     }
   }
 }
