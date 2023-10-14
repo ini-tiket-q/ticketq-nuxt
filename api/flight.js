@@ -1,104 +1,16 @@
 export default $axios => ({
-  getAllSchedule () {
-    return {
-      data: [
-        {
-          airline: { code: 'SUPERAIRJET', name: 'Super Air Jet' },
-          origin: { name: 'BTH', at: '2023-09-03T08:25:00+00:00' },
-          destination: { name: 'DPS', at: '2023-09-03T10:00:00+00:00' },
-          transit: [],
-          freeBaggage: 20,
-          reschedulable: true,
-          price: 1920000,
-          stopPoint: [
-            {
-              location: {
-                city: 'Batam (BTH)',
-                airport: 'Hang Nadim'
-              },
-              at: '2023-09-03T08:25:00+00:00',
-              duration: '1h',
-              plane: {
-                code: 'QG-495',
-                type: 'Airbus A320'
-              }
-            },
-            {
-              location: {
-                city: 'Bali (DPS)',
-                airport: 'I Gusti Ngurah Rai'
-              },
-              at: '2023-09-03T10:00:00+00:00',
-              duration: null,
-              plane: null
-            }
-          ]
-        },
-        {
-          airline: { code: 'LIONAIR', name: 'Lion Air' },
-          origin: { name: 'BTH', at: '2023-09-03T08:25:00+00:00' },
-          destination: { name: 'DPS', at: '2023-09-03T10:00:00+00:00' },
-          transit: [],
-          freeBaggage: 20,
-          reschedulable: true,
-          price: 1920000,
-          stopPoint: [
-            {
-              location: {
-                city: 'Batam (BTH)',
-                airport: 'Hang Nadim'
-              },
-              at: '2023-09-03T08:25:00+00:00',
-              duration: '1h',
-              plane: {
-                code: 'QG-495',
-                type: 'Airbus A320'
-              }
-            },
-            {
-              location: {
-                city: 'Bali (DPS)',
-                airport: 'I Gusti Ngurah Rai'
-              },
-              at: '2023-09-03T10:00:00+00:00',
-              duration: null,
-              plane: null
-            }
-          ]
-        },
-        {
-          airline: { code: 'SUPERAIRJET', name: 'Super Air Jet' },
-          origin: { name: 'BTH', at: '2023-09-03T08:25:00+00:00' },
-          destination: { name: 'DPS', at: '2023-09-03T10:00:00+00:00' },
-          transit: [],
-          freeBaggage: 20,
-          reschedulable: true,
-          price: 1920000,
-          stopPoint: [
-            {
-              location: {
-                city: 'Batam (BTH)',
-                airport: 'Hang Nadim'
-              },
-              at: '2023-09-03T08:25:00+00:00',
-              duration: '1h',
-              plane: {
-                code: 'QG-495',
-                type: 'Airbus A320'
-              }
-            },
-            {
-              location: {
-                city: 'Bali (DPS)',
-                airport: 'I Gusti Ngurah Rai'
-              },
-              at: '2023-09-03T10:00:00+00:00',
-              duration: null,
-              plane: null
-            }
-          ]
-        }
-      ]
+  async getAllSchedule () {
+    try {
+      // const response = await $axios.get('http://143.198.208.181:3000/api/getcodearea-json')
+      const response = await $axios.get('https://web.klikmbc.biz/json/getcodearea-json')
+      const data = response.data
+      console.log({ data })
+
+      return data
+    } catch (error) {
+      // Handle errors here
+      console.error('Error fetching data from the API:', error)
+      throw error
     }
   }
 })

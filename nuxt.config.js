@@ -7,6 +7,17 @@ export default {
     port: process.env.PORT || 8000
   },
 
+  urlConfig: {
+    base_url: process.env.BASE_URL
+  },
+
+  serverMiddleware: [
+    (req, res, next) => {
+      res.removeHeader('Referrer-Policy');
+      next();
+    }
+  ],
+
   head: {
     titleTemplate: '%s ' + process.env.TITLE,
     htmlAttrs: {
@@ -47,8 +58,16 @@ export default {
   modules: [
     '@nuxtjs/axios',
     'v-wave/nuxt',
-    'vue-currency-filter/nuxt'
+    'vue-currency-filter/nuxt',
+    '@nuxtjs/proxy'
   ],
+
+  proxy: {
+    '/api': {
+      target: 'https://web.klikmbc.biz/json',
+      pathRewrite: { '^/api': '' }
+    }
+  },
 
   axios: { baseURL: process.env.API_BASE_URL },
 

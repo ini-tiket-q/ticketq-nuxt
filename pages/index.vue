@@ -6,7 +6,7 @@
           <div class="p-2 border border-white rounded-lg bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm md:hidden">
             <div class="grid grid-cols-12 gap-4">
               <div class="col-span-12 sm:col-span-6">
-                <SpSelect label="From" placeholder="Choose region" :list="allCity" @change="selectOrigin" />
+                <SpSelect label="From" placeholder="Choose origin" @change="selectOrigin" />
               </div>
               <div class="col-span-12 sm:col-span-6">
                 <SpSelect label="To" placeholder="Choose destination" :list="allCity" @change="selectDestination" />
@@ -38,7 +38,7 @@
                 <option :value="null">
                   Choose origin
                 </option>
-                <option v-for="(city, index) in allCity" :key="index" :value="city.id">
+                <option v-for="(city, index) in allAirports" :key="index" :value="city.id">
                   {{ city.text }}
                 </option>
               </select>
@@ -49,7 +49,7 @@
                 <option :value="null">
                   Choose destination
                 </option>
-                <option v-for="(city, index) in allCity" :key="index" :value="city.id">
+                <option v-for="(city, index) in allAirports" :key="index" :value="city.id">
                   {{ city.text }}
                 </option>
               </select>
@@ -140,6 +140,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
 import SpSelect from '~/components/partial/SpSelect'
 import SpInputText from '~/components/partial/SpInputText'
 import SpButton from '~/components/partial/SpButton'
@@ -155,12 +156,15 @@ export default {
 
   layout: 'landing',
 
+  head () {
+    return {
+      title: 'TiketQ - pembelian tiket online'
+    }
+  },
+
   data () {
     return {
-      allCity: [
-        { value: 'bth', text: 'Batam (BTH)' },
-        { value: 'dps', text: 'Bali (DPS)' }
-      ],
+      allCity: this.$store.state.allAirports,
       allClass: [
         { value: 'economy', text: 'Economy' },
         { value: 'business', text: 'Business' },
@@ -196,12 +200,44 @@ export default {
     }
   },
 
+  created () {
+    this.allCity = [
+      { value: null, text: 'Not Found' }
+    ]
+  },
+
+  async fetch () {
+    window.localStorage.removeItem('schedule')
+    window.localStorage.removeItem('orderData')
+    this.getAllRoute()
+    await this.getAirports()
+  },
+
+  computed: {
+    ...mapState({ allAirports: state => state.allAirports }),
+    ...mapGetters({ allAirports: 'airport/allAirports' })
+  },
+
   methods: {
     selectOrigin (selection) { this.inputSearch.origin = selection },
 
     selectDestination (selection) { this.inputSearch.destination = selection },
 
-    selectClass (selection) { this.inputSearch.class = selection }
+    selectClass (selection) { this.inputSearch.class = selection },
+
+    ...mapActions({ getAirports: 'airport/getAirports' }),
+
+    getAllRoute () {
+      this.allRoute = [
+        {
+          origin: 'Batam (BTH)',
+          destination: 'Bali (DPS)',
+          at: '2023-09-03T21:38:55+00:00',
+          passanger: 1,
+          class: 'Economy'
+        }
+      ]
+    }
   }
 }
 </script>
